@@ -1,5 +1,8 @@
 import argcomplete
 import argparse
+import sys
+from graph_rep import *
+from menu import *
 
 '''
 Usage:
@@ -26,7 +29,10 @@ Kahn
 Tarjan
 '''
 def main():
-    print('Graphs')
+    if sys.argv[1] == '--generate':
+        adjacency_matrix()
+
+    menu()
 
 
 if __name__ == '__main__':
