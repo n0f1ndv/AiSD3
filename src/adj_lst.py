@@ -1,4 +1,8 @@
-def adjacency_list():
+def generate_adjacency_list():
+    pass
+
+
+def input_adjacency_list():
     adj_lst = []
     nodes = int(input('nodes> '))
 
@@ -12,10 +16,6 @@ def adjacency_list():
     print(adj_lst)
 
     return adj_lst
-
-
-def print_adj_lst(graph):
-    print(graph)
 
 
 def vertecies(graph):
@@ -39,7 +39,11 @@ def neighbours(graph, node):
     return lst
 
 
-def find(graph, start, end):
+def print_adjacency_list(graph):
+    print(graph)
+
+
+def adjacency_list_find(graph, start, end):
     exists = False
 
     for edge in graph:
@@ -109,6 +113,7 @@ def remove(graph, vertex):
     return [x for x in graph if x not in to_delete], vertex
 
 
+# TODO: fix this
 def adjacency_list_kahn(graph):
     topo_order = []
     zero_in_degree = []

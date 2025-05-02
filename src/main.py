@@ -51,19 +51,19 @@ def main():
 
     if sys.argv[1] == '--generate':
         if rep.lower() == 'list':
-            graph = adjacency_matrix()
+            graph = generate_adjacency_matrix()
         elif rep.lower() == 'matrix':
-            pass
+            graph = generate_adjacency_list()
         elif rep.lower() == 'table':
-            pass
-
-    if sys.argv[1] == '--user-provided':
+            graph = generate_table()
+            
+    elif sys.argv[1] == '--user-provided':
         if rep.lower() == 'list':
-            graph = adjacency_list()
+            graph = input_adjacency_list()
         elif rep.lower() == 'matrix':
-            pass
+            graph = input_adjacency_matrix()
         elif rep.lower() == 'table':
-            pass
+            graph = input_table()
 
     menu(graph, rep)
 

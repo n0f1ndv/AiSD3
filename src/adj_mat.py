@@ -1,6 +1,6 @@
 import numpy as np
 
-def adjacency_matrix():
+def generate_adjacency_matrix():
     nodes = int(input('nodes> '))
     sat = int(input('saturation> '))
 
@@ -9,5 +9,23 @@ def adjacency_matrix():
 
     return adj_matrix
 
+def input_adjacency_matrix():
+    pass
+
 def print_adjacency_matrix(matrix):
     print(*[str(row)[1:-1] for row in matrix], sep='\n')
+
+def adjacency_matrix_find():
+    pass
+
+def adjacency_matrix_bfs():
+    pass
+
+def adjacency_matrix_dfs():
+    pass
+
+def adjacency_matrix_kahn():
+    pass
+
+def adjcacency_matrix_tarjan():
+    pass
