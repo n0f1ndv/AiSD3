@@ -20,15 +20,19 @@ def menu(graph, rep):
                     pass
 
             elif state == 'find':
-                if rep.lower() == 'list':
+                try:
                     start = int(input('start> '))
                     end = int(input('end> '))
 
-                    find(graph, start, end)
-                elif rep.lower() == 'matrix':
-                    pass
-                elif rep.lower() == 'table':
-                    pass
+                    if rep.lower() == 'list':
+                        find(graph, start, end)
+                    elif rep.lower() == 'matrix':
+                        pass
+                    elif rep.lower() == 'table':
+                        pass
+                except ValueError:
+                    print('Values must be numbers')
+
 
             elif state == 'bfs':
                 if rep.lower() == 'list':
