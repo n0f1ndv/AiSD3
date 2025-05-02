@@ -8,13 +8,14 @@ def adjacency_list():
         for num in tmp:
             adj_lst.append((i, num))
 
+    # for debugging
     print(adj_lst)
 
     return adj_lst
 
 
 def print_adj_lst(graph):
-    pass
+    print(graph)
 
 
 def vertecies(graph):
@@ -37,6 +38,20 @@ def neighbours(graph, node):
     return lst
 
 
+def find(graph, start, end):
+    exists = False
+
+    for edge in graph:
+        if start == edge[0] and end == edge[1]:
+            exists = True
+            break
+
+    if exists == True:
+        print(f'True: Edge {(start, end)} exists in the Graph.')
+    else:
+        print(f'False: Edge {(start, end)} doesn\'t exist in the Graph.')
+
+
 def adjacency_list_bfs(graph, vertex=0):
     marked = [False for _ in range(len(graph))]
     
@@ -52,3 +67,7 @@ def adjacency_list_bfs(graph, vertex=0):
                     queue.append(x)
 
     print()
+
+
+def adjacency_list_dfs(graph, vertex=0):
+    pass

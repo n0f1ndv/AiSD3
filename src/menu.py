@@ -12,17 +12,39 @@ def menu(graph, rep):
                 state = 'exit'
 
             elif state == 'print':
-                pass
+                if rep.lower() == 'list':
+                    print_adj_lst(graph)
+                elif rep.lower() == 'matrix':
+                    pass
+                elif rep.lower() == 'table':
+                    pass
 
             elif state == 'find':
-                pass
+                if rep.lower() == 'list':
+                    start = int(input('start> '))
+                    end = int(input('end> '))
+
+                    find(graph, start, end)
+                elif rep.lower() == 'matrix':
+                    pass
+                elif rep.lower() == 'table':
+                    pass
 
             elif state == 'bfs':
                 if rep.lower() == 'list':
                     adjacency_list_bfs(graph)
+                elif rep.lower() == 'matrix':
+                    pass
+                elif rep.lower() == 'table':
+                    pass
 
             elif state == 'dfs':
-                pass
+                if rep.lower() == 'list':
+                    adjacency_list_dfs(graph)
+                elif rep.lower() == 'matrix':
+                    pass
+                elif rep.lower() == 'table':
+                    pass
 
             elif state == 'kahn':
                 pass
