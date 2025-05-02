@@ -38,6 +38,16 @@ def neighbours(graph, node):
     return lst
 
 
+def remove(graph, vertex):
+    to_delete = []
+    
+    for edge in graph:
+        if edge[0] == vertex or edge[1] == vertex:
+            to_delete.append(edge)
+
+    return [x for x in graph if x not in to_delete]
+
+
 def find(graph, start, end):
     exists = False
 
@@ -86,3 +96,17 @@ def adjacency_list_dfs(graph, vertex=0):
                     stack.append(x)
 
     print()
+
+
+def adjacency_list_kahn(graph, vertex):
+    lst = []
+
+    while len(graph) > 0:
+        lst.append(remove(graph, vertex))
+        
+
+    return lst
+
+
+def adjacency_list_tarjan(graph):
+    pass
