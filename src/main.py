@@ -1,7 +1,8 @@
 import argcomplete
 import argparse
 import sys
-from graph_rep import *
+from adj_mat import *
+from adj_lst import *
 from menu import *
 
 '''
@@ -29,10 +30,14 @@ Kahn
 Tarjan
 '''
 def main():
-    if sys.argv[1] == '--generate':
-        adjacency_matrix()
+    graph = None
 
-    menu()
+    if sys.argv[1] == '--generate':
+        graph = adjacency_matrix()
+    if sys.argv[1] == '--user-provided':
+        graph = adjacency_list()
+
+    menu(graph, 'list')
 
 
 if __name__ == '__main__':
