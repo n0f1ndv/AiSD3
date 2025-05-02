@@ -1,8 +1,8 @@
 import argcomplete
 import argparse
 import sys
-from adj_mat import adjacency_matrix
-from adj_lst import adjacency_list
+from adj_mat import *
+from adj_lst import *
 from menu import *
 
 '''
@@ -56,7 +56,7 @@ def main():
             graph = generate_adjacency_list()
         elif rep.lower() == 'table':
             graph = generate_table()
-            
+
     elif sys.argv[1] == '--user-provided':
         if rep.lower() == 'list':
             graph = input_adjacency_list()
