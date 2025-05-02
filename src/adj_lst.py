@@ -22,8 +22,9 @@ def vertecies(graph):
     lst = []
 
     for edge in graph:
-        if edge[0] not in lst:
-            lst.append(edge[0])
+        for i in range(2):
+            if edge[i] not in lst:
+                lst.append(edge[i])
 
     return lst
 
@@ -36,16 +37,6 @@ def neighbours(graph, node):
             lst.append(edge[1])
 
     return lst
-
-
-def remove(graph, vertex):
-    to_delete = []
-    
-    for edge in graph:
-        if edge[0] == vertex or edge[1] == vertex:
-            to_delete.append(edge)
-
-    return [x for x in graph if x not in to_delete]
 
 
 def find(graph, start, end):
@@ -79,7 +70,7 @@ def adjacency_list_bfs(graph, vertex=0):
 
     print()
 
-
+# seems like dfs does not work :(
 def adjacency_list_dfs(graph, vertex=0):
     print('Depth-first search order:')
     marked = [False for _ in range(len(graph))]
@@ -98,14 +89,45 @@ def adjacency_list_dfs(graph, vertex=0):
     print()
 
 
-def adjacency_list_kahn(graph, vertex):
-    lst = []
+def degree(graph, vertex):
+    in_degree = 0
 
-    while len(graph) > 0:
-        lst.append(remove(graph, vertex))
+    for edge in graph:
+        if edge[1] == vertex:
+            in_degree += 1
+
+    return in_degree
+
+
+def remove(graph, vertex):
+    to_delete = []
+
+    for edge in graph:
+        if edge[0] == vertex or edge[1] == vertex:
+            to_delete.append(edge)
+
+    return [x for x in graph if x not in to_delete], vertex
+
+
+def adjacency_list_kahn(graph):
+    topo_order = []
+    zero_in_degree = []
+    for v in vertecies(graph):
+            if degree(graph, v) == 0:
+                zero_in_degree.append(v)
+
+    while len(zero_in_degree) > 0:
+        print(zero_in_degree)
+
+        graph, n = remove(graph, zero_in_degree.pop(0))
+        topo_order.append(n)
+
+        for v in vertecies(graph):
+            if degree(graph, v) == 0:
+                zero_in_degree.append(v)
         
 
-    return lst
+    return topo_order
 
 
 def adjacency_list_tarjan(graph):
