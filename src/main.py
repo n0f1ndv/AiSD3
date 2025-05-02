@@ -1,8 +1,8 @@
 import argcomplete
 import argparse
 import sys
-from adj_mat import *
-from adj_lst import *
+from adj_mat import adjacency_matrix
+from adj_lst import adjacency_list
 from menu import *
 
 '''
