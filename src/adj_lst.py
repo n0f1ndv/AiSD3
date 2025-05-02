@@ -53,6 +53,7 @@ def find(graph, start, end):
 
 
 def adjacency_list_bfs(graph, vertex=0):
+    print('Breath-first search order:')
     marked = [False for _ in range(len(graph))]
     
     queue = [vertex]
@@ -70,4 +71,18 @@ def adjacency_list_bfs(graph, vertex=0):
 
 
 def adjacency_list_dfs(graph, vertex=0):
-    pass
+    print('Depth-first search order:')
+    marked = [False for _ in range(len(graph))]
+
+    stack = [vertex]
+    while len(stack) > 0:
+        vertex = stack.pop()
+        if not marked[vertex]:
+            print(vertex, end=' ')
+            marked[vertex] = True
+
+            for x in neighbours(graph, vertex):
+                if not marked[x]:
+                    stack.append(x)
+
+    print()
