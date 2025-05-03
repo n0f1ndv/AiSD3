@@ -5,7 +5,7 @@ from collections import defaultdict, deque
 # thought I was doing list
 # and I did table
 
-def generate_table():
+def generate_table(nodes, saturation):
     pass
 
 
@@ -35,6 +35,7 @@ def vertices(graph):
 
 
 def print_table(graph):
+    print('List of edges:')
     for edge in graph:
         print(edge)
 
@@ -102,35 +103,32 @@ def table_dfs(graph, vertex=0):
 
 
 def table_kahn(graph):
-    in_degree = defaultdict(int)
-    adj = defaultdict(list)
+    vert = vertices(graph)
+    in_degree = deque([0 for _ in range(len(vert))])
 
-    for u, v in graph:
-        adj[u].append(v)
-        in_degree[v] += 1
-
-    all_vertices = vertices(graph)
-    for v in all_vertices:
-        in_degree[v] = in_degree.get(v, 0)
-
-    zero_in_degree = deque([v for v in all_vertices if in_degree[v] == 0])
+    for v in vert:
+        for edge in graph:
+            if edge[1] == v:
+                in_degree[v] += 1
     
-    topo_order = []
+    queue = deque([x for x in range(len(vert)) if in_degree[x] == 0])
 
-    while zero_in_degree:
-        current = zero_in_degree.popleft()
-        topo_order.append(current)
+    topo_sort = []
 
-        for neighbor in adj.get(current, []):
+    while queue:
+        vertex = queue.popleft()
+        topo_sort.append(vertex)
+
+        for neighbor in get_neighbors(graph, vertex):
             in_degree[neighbor] -= 1
             if in_degree[neighbor] == 0:
-                zero_in_degree.append(neighbor)
+                queue.append(neighbor)
 
-    if len(topo_order) != len(all_vertices):
+    if len(topo_sort) != len(vert):
         print('Graph has at least one cycle')
         return []
 
-    return topo_order
+    return topo_sort
 
 
 def table_tarjan(graph):

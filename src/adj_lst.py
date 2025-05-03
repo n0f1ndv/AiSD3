@@ -22,6 +22,7 @@ def input_adjacency_list(nodes):
 
 
 def print_adjacency_list(graph):
+    print('Adjacency list:')
     for u, v in graph.items():
         print(f'{u}-> {v}')
 
@@ -80,13 +81,13 @@ def adjacency_list_dfs(graph, vertex=0):
 
 
 def adjacency_list_kahn(graph):
-    zero_in_degree = [0 for _ in range(len(graph))]
+    in_degree = [0 for _ in range(len(graph))]
 
     for u in range(len(graph)):
         for v in graph[u]:
-            zero_in_degree[v] += 1
+            in_degree[v] += 1
 
-    queue = deque([x for x in range(len(graph)) if zero_in_degree[x] == 0])
+    queue = deque([x for x in range(len(graph)) if in_degree[x] == 0])
 
     topo_sort = []
 
@@ -95,8 +96,8 @@ def adjacency_list_kahn(graph):
         topo_sort.append(vertex)
 
         for neighbor in graph[vertex]:
-            zero_in_degree[neighbor] -= 1
-            if zero_in_degree[neighbor] == 0:
+            in_degree[neighbor] -= 1
+            if in_degree[neighbor] == 0:
                 queue.append(neighbor)
 
     if len(topo_sort) != len(graph):
