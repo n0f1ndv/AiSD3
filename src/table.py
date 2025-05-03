@@ -64,7 +64,6 @@ def get_neighbors(graph, vertex):
 
 
 def table_bfs(graph, vertex=0):
-    print('Breath-first search order:')
     marked = [False for _ in range(len(vertices(graph)))]
     queue = []
     
@@ -84,10 +83,11 @@ def table_bfs(graph, vertex=0):
 
 
 def table_dfs(graph, vertex=0):
-    print('Depth-first search order:')
     marked = [False for _ in range(len(vertices(graph)))]
+    stack = []
 
-    stack = [vertex]
+    stack.append(vertex)
+
     while stack:
         vertex = stack.pop()
         print(vertex, end=' ')
