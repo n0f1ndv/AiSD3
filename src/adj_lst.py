@@ -1,3 +1,5 @@
+from collections import defaultdict, deque
+
 def generate_adjacency_list():
     pass
 
@@ -18,25 +20,14 @@ def input_adjacency_list():
     return adj_lst
 
 
-def vertecies(graph):
-    lst = []
+def vertices(graph):
+    unique_vertices = set()
 
-    for edge in graph:
-        for i in range(2):
-            if edge[i] not in lst:
-                lst.append(edge[i])
+    for u, v in graph:
+        unique_vertices.add(u)
+        unique_vertices.add(v)
 
-    return lst
-
-
-def neighbours(graph, node):
-    lst = []
-
-    for edge in graph:
-        if node == edge[0]:
-            lst.append(edge[1])
-
-    return lst
+    return list(unique_vertices)
 
 
 def print_adjacency_list(graph):
@@ -60,17 +51,19 @@ def adjacency_list_find(graph, start, end):
 def adjacency_list_bfs(graph, vertex=0):
     print('Breath-first search order:')
     marked = [False for _ in range(len(graph))]
+    queue = []
     
-    queue = [vertex]
-    while len(queue) > 0:
-        vertex = queue.pop(0)
-        if not marked[vertex]:
-            print(vertex, end=' ')
-            marked[vertex] = True
+    queue.append(vertex)
+    marked[vertex] = True
 
-            for x in neighbours(graph, vertex):
-                if not marked[x]:
-                    queue.append(x)
+    while queue:
+        vertex = queue.pop(0)
+        print(vertex, end=' ')
+
+        for x in graph[vertex]:
+            if not marked[x]:
+                queue.append(x)
+                marked[x] = True
 
     print()
 
@@ -82,55 +75,45 @@ def adjacency_list_dfs(graph, vertex=0):
     stack = [vertex]
     while len(stack) > 0:
         vertex = stack.pop()
-        if not marked[vertex]:
-            print(vertex, end=' ')
-            marked[vertex] = True
+        print(vertex, end=' ')
+        marked[vertex] = True
 
-            for x in neighbours(graph, vertex):
-                if not marked[x]:
-                    stack.append(x)
+        for x in graph[vertex]:
+            if not marked[x]:
+                stack.append(x)
+                marked[x] = True
 
     print()
 
 
-def degree(graph, vertex):
-    in_degree = 0
-
-    for edge in graph:
-        if edge[1] == vertex:
-            in_degree += 1
-
-    return in_degree
-
-
-def remove(graph, vertex):
-    to_delete = []
-
-    for edge in graph:
-        if edge[0] == vertex or edge[1] == vertex:
-            to_delete.append(edge)
-
-    return [x for x in graph if x not in to_delete], vertex
-
-
-# TODO: fix this
 def adjacency_list_kahn(graph):
+    in_degree = defaultdict(int)
+    adj = defaultdict(list)
+
+    for u, v in graph:
+        adj[u].append(v)
+        in_degree[v] += 1
+
+    all_vertices = vertices(graph)
+    for v in all_vertices:
+        in_degree[v] = in_degree.get(v, 0)
+
+    zero_in_degree = deque([v for v in all_vertices if in_degree[v] == 0])
+    
     topo_order = []
-    zero_in_degree = []
-    for v in vertecies(graph):
-            if degree(graph, v) == 0:
-                zero_in_degree.append(v)
 
-    while len(zero_in_degree) > 0:
-        print(zero_in_degree)
+    while zero_in_degree:
+        current = zero_in_degree.popleft()
+        topo_order.append(current)
 
-        graph, n = remove(graph, zero_in_degree.pop(0))
-        topo_order.append(n)
+        for neighbor in adj.get(current, []):
+            in_degree[neighbor] -= 1
+            if in_degree[neighbor] == 0:
+                zero_in_degree.append(neighbor)
 
-        for v in vertecies(graph):
-            if degree(graph, v) == 0:
-                zero_in_degree.append(v)
-        
+    if len(topo_order) != len(all_vertices):
+        print("Graph has at least one cycle")
+        return []
 
     return topo_order
 
