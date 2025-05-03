@@ -50,6 +50,15 @@ def main():
             print('\nKeyboard Interrupt')
             sys.exit(0)
 
+    while True:
+        try:
+            nodes = int(input('nodes> '))
+        except ValueError:
+            print('Number of nodes MUST be an integer')
+            continue
+        else:
+            break
+
     if sys.argv[1] == '--generate':
         if rep.lower() == 'list':
             graph = generate_adjacency_matrix()
@@ -60,11 +69,11 @@ def main():
 
     elif sys.argv[1] == '--user-provided':
         if rep.lower() == 'list':
-            graph = input_adjacency_list()
+            graph = input_adjacency_list(nodes)
         elif rep.lower() == 'matrix':
-            graph = input_adjacency_matrix()
+            graph = input_adjacency_matrix(nodes)
         elif rep.lower() == 'table':
-            graph = input_table()
+            graph = input_table(nodes)
 
     menu(graph, rep)
 

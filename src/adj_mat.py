@@ -9,7 +9,7 @@ def generate_adjacency_matrix():
 
     return adj_matrix
 
-def input_adjacency_matrix():
+def input_adjacency_matrix(nodes):
     pass
 
 def print_adjacency_matrix(matrix):

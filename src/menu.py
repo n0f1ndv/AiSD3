@@ -15,7 +15,7 @@ def menu(graph, rep):
 
             elif state == 'print':
                 if rep == 'list':
-                    print_adjacency_list()
+                    print_adjacency_list(graph)
                 elif rep == 'matrix':
                     print_adjacency_matrix()
                 elif rep == 'table':
@@ -27,7 +27,7 @@ def menu(graph, rep):
                     end = int(input('end> '))
 
                     if rep == 'list':
-                        adjacency_list_find()
+                        adjacency_list_find(graph, start, end)
                     elif rep == 'matrix':
                         adjacency_matrix_find()
                     elif rep == 'table':

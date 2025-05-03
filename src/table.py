@@ -1,20 +1,16 @@
 from collections import defaultdict, deque
 
+# TODO: clean up this shit 
+# it's messed up because I
+# thought I was doing list
+# and I did table
+
 def generate_table():
     pass
 
 
-def input_table():
+def input_table(nodes):
     table = []
-
-    while True:
-        try:
-            nodes = int(input('nodes> '))
-        except ValueError:
-            print('Number of nodes MUST be an integer')
-            continue
-        else:
-            break
 
     for i in range(nodes):
         tmp = [int(x) for x in input(f'{i}> ').split()]
