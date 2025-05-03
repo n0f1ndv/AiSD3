@@ -36,16 +36,18 @@ def menu(graph, rep):
                     print('Values must be numbers')
 
             elif state == 'bfs':
+                print('Breath-first search order:')
                 if rep == 'list':
-                    adjacency_list_bfs()
+                    adjacency_list_bfs(graph)
                 elif rep == 'matrix':
                     adjacency_matrix_bfs(graph)
                 elif rep == 'table':
                     table_bfs(graph)
 
             elif state == 'dfs':
+                print('Depth-first search order:')
                 if rep == 'list':
-                    adjacency_list_dfs()
+                    adjacency_list_dfs(graph)
                 elif rep == 'matrix':
                     adjacency_matrix_dfs(graph)
                 elif rep == 'table':
@@ -54,13 +56,14 @@ def menu(graph, rep):
             elif state == 'kahn':
                 print('Topological order using Kahn\' algorithm: ')
                 if rep == 'list':
-                    print(adjacency_list_kahn())
+                    print(adjacency_list_kahn(graph))
                 elif rep == 'matrix':
                     print(adjacency_matrix_kahn())
                 elif rep == 'table':
                     print(table_kahn(graph))
 
             elif state == 'tarjan':
+                print('Topological order using Tarjan\' algorithm: ')
                 if rep == 'list':
                     print(adjacency_list_kahn)
                 elif rep == 'matrix':
