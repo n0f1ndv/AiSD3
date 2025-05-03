@@ -3,6 +3,7 @@ from collections import defaultdict
 def generate_adjacency_list():
     pass
 
+
 def input_adjacency_list(nodes):
     adjacency_list = defaultdict(list)
 
@@ -17,9 +18,11 @@ def input_adjacency_list(nodes):
 
     return adjacency_list
 
+
 def print_adjacency_list(graph):
     for u, v in graph.items():
         print(f'{u}-> {v}')
+
 
 def adjacency_list_find(graph, start, end):
     exists = False
@@ -34,18 +37,49 @@ def adjacency_list_find(graph, start, end):
     if exists == True:
         print(f'True: Edge {(start, end)} exists in the Graph.')
     else:
-        print(f'False: Edge {(start, end)} doesn\'t exist in the Graph.')
-            
+        print(f'False: Edge {(start, end)} doesn\'t exist in the Graph.')   
 
 
-def adjacency_list_bfs():
-    pass
+def adjacency_list_bfs(graph, vertex=0):
+    marked = [False for _ in range(len(graph))]
+    queue = []
 
-def adjacency_list_dfs():
-    pass
+    queue.append(vertex)
+    marked[vertex] = True
+
+    while queue:
+        vertex = queue.pop(0)
+        print(vertex, end=' ')
+
+        for x in graph[vertex]:
+            if not marked[x]:
+                queue.append(x)
+                marked[x] = True
+
+    print()
+
+def adjacency_list_dfs(graph, vertex=0):
+    marked = [False for _ in range(len(graph))]
+    stack = []
+
+    stack.append(vertex)
+
+    while stack:
+        vertex = stack.pop()
+        print(vertex, end=' ')
+        marked[vertex] = True
+
+        for x in graph[vertex]:
+            if not marked[x]:
+                stack.append(x)
+                marked[x] = True
+
+    print()
+
 
 def adjacency_list_kahn():
     pass
+
 
 def adjacency_list_tarjan():
     pass
