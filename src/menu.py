@@ -17,7 +17,7 @@ def menu(graph, rep):
                 if rep == 'list':
                     print_adjacency_list(graph)
                 elif rep == 'matrix':
-                    print_adjacency_matrix()
+                    print_adjacency_matrix(graph)
                 elif rep == 'table':
                     print_table(graph)
 
@@ -29,7 +29,7 @@ def menu(graph, rep):
                     if rep == 'list':
                         adjacency_list_find(graph, start, end)
                     elif rep == 'matrix':
-                        adjacency_matrix_find()
+                        adjacency_matrix_find(graph, start, end)
                     elif rep == 'table':
                         table_find(graph, start, end)
                 except ValueError:
@@ -39,7 +39,7 @@ def menu(graph, rep):
                 if rep == 'list':
                     adjacency_list_bfs()
                 elif rep == 'matrix':
-                    adjacency_matrix_bfs()
+                    adjacency_matrix_bfs(graph)
                 elif rep == 'table':
                     table_bfs(graph)
 
@@ -47,7 +47,7 @@ def menu(graph, rep):
                 if rep == 'list':
                     adjacency_list_dfs()
                 elif rep == 'matrix':
-                    adjacency_matrix_dfs()
+                    adjacency_matrix_dfs(graph)
                 elif rep == 'table':
                     table_dfs(graph)
 

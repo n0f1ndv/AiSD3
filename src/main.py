@@ -61,9 +61,9 @@ def main():
 
     if sys.argv[1] == '--generate':
         if rep.lower() == 'list':
-            graph = generate_adjacency_matrix()
-        elif rep.lower() == 'matrix':
             graph = generate_adjacency_list()
+        elif rep.lower() == 'matrix':
+            graph = generate_adjacency_matrix(nodes)
         elif rep.lower() == 'table':
             graph = generate_table()
 
