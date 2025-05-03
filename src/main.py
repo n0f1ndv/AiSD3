@@ -3,6 +3,7 @@ import argparse
 import sys
 from adj_mat import *
 from adj_lst import *
+from table import *
 from menu import *
 
 '''

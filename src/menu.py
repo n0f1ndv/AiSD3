@@ -1,6 +1,6 @@
 from adj_lst import *
 from adj_mat import *
-from adj_tbl import *
+from table import *
 
 def menu(graph, rep):
     state = ''
@@ -15,11 +15,11 @@ def menu(graph, rep):
 
             elif state == 'print':
                 if rep == 'list':
-                    print_adjacency_list(graph)
+                    print_adjacency_list()
                 elif rep == 'matrix':
-                    print_adjacency_matrix
+                    print_adjacency_matrix()
                 elif rep == 'table':
-                    print_table()
+                    print_table(graph)
 
             elif state == 'find':
                 try:
@@ -27,38 +27,38 @@ def menu(graph, rep):
                     end = int(input('end> '))
 
                     if rep == 'list':
-                        adjacency_list_find(graph, start, end)
+                        adjacency_list_find()
                     elif rep == 'matrix':
                         adjacency_matrix_find()
                     elif rep == 'table':
-                        table_find()
+                        table_find(graph, start, end)
                 except ValueError:
                     print('Values must be numbers')
 
             elif state == 'bfs':
                 if rep == 'list':
-                    adjacency_list_bfs(graph)
+                    adjacency_list_bfs()
                 elif rep == 'matrix':
                     adjacency_matrix_bfs()
                 elif rep == 'table':
-                    table_bfs()
+                    table_bfs(graph)
 
             elif state == 'dfs':
                 if rep == 'list':
-                    adjacency_list_dfs(graph)
+                    adjacency_list_dfs()
                 elif rep == 'matrix':
                     adjacency_matrix_dfs()
                 elif rep == 'table':
-                    table_dfs()
+                    table_dfs(graph)
 
             elif state == 'kahn':
                 print('Topological order using Kahn\' algorithm: ')
                 if rep == 'list':
-                    print(adjacency_list_kahn(graph))
+                    print(adjacency_list_kahn())
                 elif rep == 'matrix':
                     print(adjacency_matrix_kahn())
                 elif rep == 'table':
-                    print(table_kahn())
+                    print(table_kahn(graph))
 
             elif state == 'tarjan':
                 if rep == 'list':
