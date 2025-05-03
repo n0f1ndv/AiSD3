@@ -1,4 +1,4 @@
-from collections import defaultdict
+from collections import defaultdict, deque
 
 def generate_adjacency_list():
     pass
@@ -8,6 +8,8 @@ def input_adjacency_list(nodes):
     adjacency_list = defaultdict(list)
 
     for u in range(nodes):
+        adjacency_list[u]
+
         vertices = [int(x) for x in input(f'{u}> ').split()]
         
         for v in vertices:
@@ -77,8 +79,32 @@ def adjacency_list_dfs(graph, vertex=0):
     print()
 
 
-def adjacency_list_kahn():
-    pass
+def adjacency_list_kahn(graph):
+    zero_in_degree = [0 for _ in range(len(graph))]
+
+    for u in range(len(graph)):
+        for v in graph[u]:
+            zero_in_degree[v] += 1
+
+    queue = deque([x for x in range(len(graph)) if zero_in_degree[x] == 0])
+    print(queue)
+
+    topo_sort = []
+
+    while queue:
+        vertex = queue.popleft()
+        topo_sort.append(vertex)
+
+        for neighbor in graph[vertex]:
+            zero_in_degree[neighbor] -= 1
+            if zero_in_degree[neighbor] == 0:
+                queue.append(neighbor)
+
+    if len(topo_sort) != len(graph):
+        print('Graph has at least one cycle')
+        return topo_sort
+
+    return topo_sort
 
 
 def adjacency_list_tarjan():
