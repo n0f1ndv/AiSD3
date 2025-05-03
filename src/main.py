@@ -1,10 +1,10 @@
 import argcomplete
 import argparse
 import sys
-from adj_mat import *
-from adj_lst import *
-from table import *
-from menu import *
+from adj_mat import generate_adjacency_matrix, input_adjacency_matrix
+from adj_lst import generate_adjacency_list, input_adjacency_list
+from table import generate_table, input_table
+from menu import menu
 
 '''
 Usage:

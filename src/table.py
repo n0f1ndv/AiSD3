@@ -1,9 +1,4 @@
-from collections import defaultdict, deque
-
-# TODO: clean up this shit 
-# it's messed up because I
-# thought I was doing list
-# and I did table
+from collections import deque
 
 def generate_table(nodes, saturation):
     pass
