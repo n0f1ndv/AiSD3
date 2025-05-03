@@ -87,7 +87,6 @@ def adjacency_list_kahn(graph):
             zero_in_degree[v] += 1
 
     queue = deque([x for x in range(len(graph)) if zero_in_degree[x] == 0])
-    print(queue)
 
     topo_sort = []
 
@@ -102,7 +101,7 @@ def adjacency_list_kahn(graph):
 
     if len(topo_sort) != len(graph):
         print('Graph has at least one cycle')
-        return topo_sort
+        return []
 
     return topo_sort
 
