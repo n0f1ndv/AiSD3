@@ -69,7 +69,7 @@ def menu(graph, rep):
                 elif rep == 'matrix':
                     print(adjcacency_matrix_tarjan)
                 elif rep == 'table':
-                    print(table_tarjan())
+                    print(*table_tarjan(graph))
 
             else:
                 print('This commend doesn\'t exist')

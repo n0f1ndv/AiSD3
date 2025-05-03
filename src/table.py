@@ -132,4 +132,31 @@ def table_kahn(graph):
 
 
 def table_tarjan(graph):
-    pass
+    topo_sort = deque([])
+
+    vert = vertices(graph)
+
+    temporary_mark = set()
+    permanent_mark = set()
+
+    def visit(vertex):
+        if vertex in permanent_mark:
+            return
+        if vertex in temporary_mark:
+            raise ValueError('Graph has at least one cycle')
+        
+        temporary_mark.add(vertex)
+
+        for u in get_neighbors(graph, vertex):
+            visit(u)
+
+        temporary_mark.remove(vertex)
+        permanent_mark.add(vertex)
+
+        topo_sort.appendleft(vertex)
+    
+    for v in vert:
+        if v not in permanent_mark:
+            visit(v)
+
+    return topo_sort
