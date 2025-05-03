@@ -6,7 +6,15 @@ def generate_adjacency_list():
 
 def input_adjacency_list():
     adj_lst = []
-    nodes = int(input('nodes> '))
+
+    while True:
+        try:
+            nodes = int(input('nodes> '))
+        except ValueError:
+            print('Number of nodes MUST be an integer')
+            continue
+        else:
+            break
 
     for i in range(nodes):
         tmp = [int(x) for x in input(f'{i}> ').split()]
@@ -48,9 +56,19 @@ def adjacency_list_find(graph, start, end):
         print(f'False: Edge {(start, end)} doesn\'t exist in the Graph.')
 
 
+def get_neighbors(graph, vertex):
+    neighbors = []
+
+    for edge in graph:
+        if edge[0] == vertex:
+            neighbors.append(edge[1])
+
+    return list(set(neighbors))
+
+
 def adjacency_list_bfs(graph, vertex=0):
     print('Breath-first search order:')
-    marked = [False for _ in range(len(graph))]
+    marked = [False for _ in range(len(vertices(graph)))]
     queue = []
     
     queue.append(vertex)
@@ -60,25 +78,25 @@ def adjacency_list_bfs(graph, vertex=0):
         vertex = queue.pop(0)
         print(vertex, end=' ')
 
-        for x in graph[vertex]:
+        for x in get_neighbors(graph, vertex):
             if not marked[x]:
                 queue.append(x)
                 marked[x] = True
 
     print()
 
-# seems like dfs does not work :(
+
 def adjacency_list_dfs(graph, vertex=0):
     print('Depth-first search order:')
-    marked = [False for _ in range(len(graph))]
+    marked = [False for _ in range(len(vertices(graph)))]
 
     stack = [vertex]
-    while len(stack) > 0:
+    while stack:
         vertex = stack.pop()
         print(vertex, end=' ')
         marked[vertex] = True
 
-        for x in graph[vertex]:
+        for x in get_neighbors(graph, vertex):
             if not marked[x]:
                 stack.append(x)
                 marked[x] = True
@@ -112,7 +130,7 @@ def adjacency_list_kahn(graph):
                 zero_in_degree.append(neighbor)
 
     if len(topo_order) != len(all_vertices):
-        print("Graph has at least one cycle")
+        print('Graph has at least one cycle')
         return []
 
     return topo_order
