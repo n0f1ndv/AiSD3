@@ -44,25 +44,25 @@ def adjacency_list_find(graph, start, end):
 
 
 def adjacency_list_bfs(graph, vertex=0):
-    marked = [False for _ in range(len(graph))]
+    visited = [False for _ in range(len(graph))]
     queue = []
 
     queue.append(vertex)
-    marked[vertex] = True
+    visited[vertex] = True
 
     while queue:
         vertex = queue.pop(0)
         print(vertex, end=' ')
 
         for x in graph[vertex]:
-            if not marked[x]:
+            if not visited[x]:
                 queue.append(x)
-                marked[x] = True
+                visited[x] = True
 
     print()
 
 def adjacency_list_dfs(graph, vertex=0):
-    marked = [False for _ in range(len(graph))]
+    visited = [False for _ in range(len(graph))]
     stack = []
 
     stack.append(vertex)
@@ -70,12 +70,12 @@ def adjacency_list_dfs(graph, vertex=0):
     while stack:
         vertex = stack.pop()
         print(vertex, end=' ')
-        marked[vertex] = True
+        visited[vertex] = True
 
         for x in graph[vertex]:
-            if not marked[x]:
+            if not visited[x]:
                 stack.append(x)
-                marked[x] = True
+                visited[x] = True
 
     print()
 
@@ -107,5 +107,30 @@ def adjacency_list_kahn(graph):
     return topo_sort
 
 
-def adjacency_list_tarjan():
-    pass
+def adjacency_list_tarjan(graph):
+    topo_sort = deque([])
+
+    temporary_mark = set()
+    permanent_mark = set()
+
+    def visit(vertex):
+        if vertex in permanent_mark:
+            return
+        if vertex in temporary_mark:
+            raise ValueError('Graph has at least one cycle')
+        
+        temporary_mark.add(vertex)
+
+        for u in graph[vertex]:
+            visit(u)
+
+        temporary_mark.remove(vertex)
+        permanent_mark.add(vertex)
+
+        topo_sort.appendleft(vertex)
+    
+    for v in graph:
+        if v not in permanent_mark:
+            visit(v)
+
+    return topo_sort

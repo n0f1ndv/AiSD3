@@ -56,16 +56,16 @@ def menu(graph, rep):
             elif state == 'kahn':
                 print('Topological order using Kahn\' algorithm: ')
                 if rep == 'list':
-                    print(adjacency_list_kahn(graph))
+                    print(*adjacency_list_kahn(graph))
                 elif rep == 'matrix':
                     print(adjacency_matrix_kahn())
                 elif rep == 'table':
-                    print(table_kahn(graph))
+                    print(*table_kahn(graph))
 
             elif state == 'tarjan':
                 print('Topological order using Tarjan\' algorithm: ')
                 if rep == 'list':
-                    print(adjacency_list_kahn)
+                    print(*adjacency_list_tarjan(graph))
                 elif rep == 'matrix':
                     print(adjcacency_matrix_tarjan)
                 elif rep == 'table':
