@@ -47,16 +47,16 @@ def input_adjacency_matrix(nodes):
     matrix = []
 
     for i in range(1,nodes+1):
-        tmp=[]
-        while not tmp:
+        while True:
             try:
                 tmp = [int(x) for x in input(f'{i}> ').replace(","," ").split()]
                 if any(j < 1 for j in tmp):
                     print("Error: Nodes' labels MUST be greater than zero.")
-                    tmp=[]
+                    continue
                 if any(j > nodes for j in tmp):
                     print("Error: Nodes' labels MUST NOT exceed the defined number of nodes.")
-                    tmp=[]
+                    continue
+                break
 
             except ValueError:
                 print("Node MUST be an integer.")

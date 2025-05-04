@@ -2,7 +2,7 @@ from adj_lst import *
 from adj_mat import *
 from table import *
 
-def menu(graph, rep):
+def menu(graph, rep, nodes):
     state = ''
 
     while True and state != 'exit':            
@@ -25,12 +25,12 @@ def menu(graph, rep):
                 while True:
                     try:
                         start = int(input('start> '))
-                        while start>len(graph) or start<1:
-                            print(f"Start must be between 0 and {len(graph)}")
+                        while start>nodes or start<1:
+                            print(f"Start must be between 0 and {nodes}")
                             start = int(input('start> '))
                         end = int(input('end> '))
-                        while end>len(graph) or end<1:
-                            print(f"End must be between 0 and {len(graph)}")
+                        while end>nodes or end<1:
+                            print(f"End must be between 0 and {nodes}")
                             end = int(input('end> '))
                         if rep == 'list':
                             adjacency_list_find(graph, start, end)

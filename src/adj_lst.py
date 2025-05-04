@@ -1,5 +1,6 @@
 from collections import defaultdict, deque
 from adj_mat import generate_adjacency_matrix
+import sys
 
 def generate_adjacency_list(nodes):
     adjacency_list = defaultdict(list)
@@ -19,7 +20,22 @@ def input_adjacency_list(nodes):
     for u in range(nodes):
         adjacency_list[u]
 
-        vertices = [int(x) for x in input(f'{u}> ').split()]
+        while True:
+            try:
+                vertices = [int(x) for x in input(f'{u+1}> ').replace(","," ").split()]
+                if any(j < 1 for j in vertices):
+                    print("Error: Nodes' labels MUST be greater than zero.")
+                    continue
+                if any(j > nodes for j in vertices):
+                    print("Error: Nodes' labels MUST NOT exceed the defined number of nodes.")
+                    continue
+                break
+
+            except ValueError:
+                print("Node MUST be an integer.")
+            except KeyboardInterrupt:
+                print('\nKeyboard Interrupt')
+                sys.exit(1)
         
         for v in vertices:
             adjacency_list[u].append(v)

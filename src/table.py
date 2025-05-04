@@ -1,5 +1,6 @@
 from collections import deque
 from adj_mat import generate_adjacency_matrix
+import sys
 
 def generate_table(nodes):
     table = []
@@ -19,10 +20,25 @@ def input_table(nodes):
     table = []
 
     for i in range(nodes):
-        tmp = [int(x) for x in input(f'{i}> ').split()]
+        while True:
+            try:
+                tmp = [int(x) for x in input(f'{i+1}> ').replace(","," ").split()]
+                if any(j < 1 for j in tmp):
+                    print("Error: Nodes' labels MUST be greater than zero.")
+                    continue
+                if any(j > nodes for j in tmp):
+                    print("Error: Nodes' labels MUST NOT exceed the defined number of nodes.")
+                    continue
+                break
+
+            except ValueError:
+                print("Node MUST be an integer.")
+            except KeyboardInterrupt:
+                print('\nKeyboard Interrupt')
+                sys.exit(1)
         
         for num in tmp:
-            table.append((i, num))
+            table.append((i+1, num))
 
     # for debugging
     print(table)

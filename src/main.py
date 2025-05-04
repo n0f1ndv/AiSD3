@@ -78,7 +78,7 @@ def main():
         elif rep.lower() == 'table':
             graph = input_table(nodes)
 
-    menu(graph, rep)
+    menu(graph, rep, nodes)
 
 
 if __name__ == '__main__':
