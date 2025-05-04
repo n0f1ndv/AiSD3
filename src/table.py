@@ -1,7 +1,18 @@
 from collections import deque
+from adj_mat import generate_adjacency_matrix
 
-def generate_table(nodes, saturation):
-    pass
+def generate_table(nodes):
+    table = []
+    adj_mat = generate_adjacency_matrix(nodes)
+
+    for u in range(nodes):
+        for v in range(nodes):
+            if adj_mat[u][v] == 1:
+                table.append((u, v))
+
+    print(adj_mat)
+
+    return table
 
 
 def input_table(nodes):

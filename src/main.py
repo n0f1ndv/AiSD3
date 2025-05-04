@@ -61,11 +61,11 @@ def main():
 
     if sys.argv[1] == '--generate':
         if rep.lower() == 'list':
-            graph = generate_adjacency_list()
+            graph = generate_adjacency_list(nodes)
         elif rep.lower() == 'matrix':
             graph = generate_adjacency_matrix(nodes)
         elif rep.lower() == 'table':
-            graph = generate_table()
+            graph = generate_table(nodes)
 
     elif sys.argv[1] == '--user-provided':
         if rep.lower() == 'list':

@@ -1,7 +1,16 @@
 from collections import defaultdict, deque
+from adj_mat import generate_adjacency_matrix
 
-def generate_adjacency_list():
-    pass
+def generate_adjacency_list(nodes):
+    adjacency_list = defaultdict(list)
+    adj_mat = generate_adjacency_matrix(nodes)
+
+    for u in range(nodes):
+        for v in range(nodes):
+            if adj_mat[u][v] == 1:
+                adjacency_list[u].append(v)
+
+    return adjacency_list
 
 
 def input_adjacency_list(nodes):
