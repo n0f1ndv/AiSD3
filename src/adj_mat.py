@@ -21,6 +21,14 @@ def generate_adjacency_matrix(nodes):
                 adj_matrix[i].append(0)
     return adj_matrix
 
+def dfs_matrix(visited, matrix, lst, v=0):
+    visited[v] = True
+    lst.append(v+1)
+
+    for i in range(len(matrix)):
+        if matrix[v][i] == 1 and not visited[i]:
+            dfs_matrix(visited, matrix, lst, i)
+
 def input_adjacency_matrix(nodes):
     matrix = []
 
@@ -29,7 +37,7 @@ def input_adjacency_matrix(nodes):
         tmp.sort()
         matrix.append([])
         for num in range(1, nodes + 1):
-            # Wyszukiwanie binarne w liście tmp
+            # binary search in tmp
             index = bisect_left(tmp, num)
             if index < len(tmp) and tmp[index] == num:
                 matrix[i - 1].append(1)
@@ -43,11 +51,13 @@ def print_adjacency_matrix(matrix):
     for i in range(1,size+1): print(F"{i} ",end='')
     print()
     print("--+",end="")
-    print("--"*size)
+    for i in range(size): print("-"*(len(str(i))+1),end='')
+    print("-")
     for i in range(size): 
         print(f"{i+1} |",end='')
-        for j in matrix[i]:
-            print(f" {j}",end="")
+        for j in range(size):
+            print(" "*len(str(j+1)),end='')
+            print(f"{matrix[i][j]}",end="")
         print()
 
 def adjacency_matrix_find(graph, start, end):
@@ -73,7 +83,6 @@ def adjacency_matrix_bfs(matrix,start=0):
             if matrix[v][i] == 1 and not visited[i]:
                 visited[i] = True
                 queue.insert(0,i)
-    print('Breath-first search order:')
     print(*lst)
 
 def adjacency_matrix_dfs(graph):
@@ -82,19 +91,36 @@ def adjacency_matrix_dfs(graph):
     visited = [False] * n
 
     dfs_matrix(visited,graph, lst)
-    print('Depth-first search order:')
     print(*lst)
 
-def adjacency_matrix_kahn():
-    pass
+def adjacency_matrix_kahn(matrix):
+    n = len(matrix)
+    in_degree = [0] * n
+
+    for i in range(n):
+        for j in range(n):
+            if matrix[i][j] == 1:
+                in_degree[j] += 1
+
+    queue = ([i for i in range(n) if in_degree[i] == 0][::-1])
+    top_order = []
+
+    while queue:
+        u = queue.pop()
+        top_order.append(u+1)
+
+        for v in range(n):
+            if matrix[u][v] == 1:
+                in_degree[v] -= 1
+                if in_degree[v] == 0:
+                    queue.insert(0,v)
+
+    if len(top_order) != n:
+        print('Graph has at least one cycle')
+
+    
+
+    return str(top_order)
 
 def adjcacency_matrix_tarjan():
     pass
-
-def dfs_matrix(visited, matrix, lst, v=0):
-    visited[v] = True
-    lst.append(v+1)
-
-    for i in range(len(matrix)):
-        if matrix[v][i] == 1 and not visited[i]:
-            dfs_matrix(visited, matrix, lst, i)

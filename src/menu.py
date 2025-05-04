@@ -58,7 +58,7 @@ def menu(graph, rep):
                 if rep == 'list':
                     print(*adjacency_list_kahn(graph))
                 elif rep == 'matrix':
-                    print(adjacency_matrix_kahn())
+                    print(adjacency_matrix_kahn(graph))
                 elif rep == 'table':
                     print(*table_kahn(graph))
 
