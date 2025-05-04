@@ -46,14 +46,14 @@ def dfs_matrix(visited, matrix, lst, v=0):
 def input_adjacency_matrix(nodes):
     matrix = []
 
-    for i in range(1,nodes+1):
+    for i in range(nodes):
         while True:
             try:
                 tmp = [int(x) for x in input(f'{i}> ').replace(","," ").split()]
-                if any(j < 1 for j in tmp):
+                if any(j < 0 for j in tmp):
                     print("Error: Nodes' labels MUST be greater than zero.")
                     continue
-                if any(j > nodes for j in tmp):
+                if any(j > nodes-1 for j in tmp):
                     print("Error: Nodes' labels MUST NOT exceed the defined number of nodes.")
                     continue
                 break
@@ -70,9 +70,9 @@ def input_adjacency_matrix(nodes):
             # binary search in tmp
             index = bisect_left(tmp, num)
             if index < len(tmp) and tmp[index] == num:
-                matrix[i - 1].append(1)
+                matrix[i].append(1)
             else:
-                matrix[i - 1].append(0)
+                matrix[i].append(0)
     return matrix
 
 def print_adjacency_matrix(matrix):
@@ -91,7 +91,7 @@ def print_adjacency_matrix(matrix):
         print()
 
 def adjacency_matrix_find(graph, start, end):
-    if graph[start-1][end-1]==1:
+    if graph[start][end]==1:
         print(f'True: Edge {(start, end)} exists in the Graph.')
     else:
         print(f'False: Edge {(start, end)} doesn\'t exist in the Graph.')

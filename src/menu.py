@@ -25,11 +25,11 @@ def menu(graph, rep, nodes):
                 while True:
                     try:
                         start = int(input('start> '))
-                        while start>nodes or start<1:
+                        while start>nodes or start<0:
                             print(f"Start must be between 0 and {nodes}")
                             start = int(input('start> '))
                         end = int(input('end> '))
-                        while end>nodes or end<1:
+                        while end>nodes or end<0:
                             print(f"End must be between 0 and {nodes}")
                             end = int(input('end> '))
                         if rep == 'list':

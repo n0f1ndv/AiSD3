@@ -22,8 +22,8 @@ def input_adjacency_list(nodes):
 
         while True:
             try:
-                vertices = [int(x) for x in input(f'{u+1}> ').replace(","," ").split()]
-                if any(j < 1 for j in vertices):
+                vertices = [int(x) for x in input(f'{u}> ').replace(","," ").split()]
+                if any(j < 0 for j in vertices):
                     print("Error: Nodes' labels MUST be greater than zero.")
                     continue
                 if any(j > nodes for j in vertices):
