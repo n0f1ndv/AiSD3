@@ -1,9 +1,23 @@
+from collections import deque
 from bisect import bisect_left
 import numpy as np
-
+import sys 
 def generate_adjacency_matrix(nodes):
     adj_matrix=[]
-    sat = int(input('saturation> '))
+    sat=101
+    while True:
+        try:
+            sat = int(input('saturation> '))
+            if sat>100 or sat<0:
+                print("Saturation has to be beetwen 0 and 100.")
+                continue
+            break
+        except ValueError:
+            print("Saturation MUST be an integer")
+        except KeyboardInterrupt:
+            print("\nKeyboardInterrupt")
+            sys.exit(1)
+    
     max_ver = int(nodes*(nodes-1)/2)
     sat_ver=int(round(max_ver*sat/100,0))
     verses = np.random.choice(range(0, max_ver), size=sat_ver, replace=False)
@@ -33,7 +47,23 @@ def input_adjacency_matrix(nodes):
     matrix = []
 
     for i in range(1,nodes+1):
-        tmp = [int(x) for x in input(f'{i}> ').split()]
+        tmp=[]
+        while not tmp:
+            try:
+                tmp = [int(x) for x in input(f'{i}> ').replace(","," ").split()]
+                if any(j < 1 for j in tmp):
+                    print("Error: Nodes' labels MUST be greater than zero.")
+                    tmp=[]
+                if any(j > nodes for j in tmp):
+                    print("Error: Nodes' labels MUST NOT exceed the defined number of nodes.")
+                    tmp=[]
+
+            except ValueError:
+                print("Node MUST be an integer.")
+            except KeyboardInterrupt:
+                print('\nKeyboard Interrupt')
+                sys.exit(1)
+        
         tmp.sort()
         matrix.append([])
         for num in range(1, nodes + 1):
@@ -70,19 +100,19 @@ def adjacency_matrix_bfs(matrix,start=0):
     lst=[]
     n = len(matrix)
     visited = [False] * n
-    queue = []
+    queue = deque()
 
     visited[start] = True
     queue.append(start)
 
     while queue:
-        v = queue.pop()
+        v = queue.popleft()
         lst.append(v+1)
 
         for i in range(n):
             if matrix[v][i] == 1 and not visited[i]:
                 visited[i] = True
-                queue.insert(0,i)
+                queue.append(i)
     print(*lst)
 
 def adjacency_matrix_dfs(graph):
@@ -102,25 +132,50 @@ def adjacency_matrix_kahn(matrix):
             if matrix[i][j] == 1:
                 in_degree[j] += 1
 
-    queue = ([i for i in range(n) if in_degree[i] == 0][::-1])
+    queue = deque([i for i in range(n) if in_degree[i] == 0])
     top_order = []
 
     while queue:
-        u = queue.pop()
+        u = queue.popleft()
         top_order.append(u+1)
 
         for v in range(n):
             if matrix[u][v] == 1:
                 in_degree[v] -= 1
                 if in_degree[v] == 0:
-                    queue.insert(0,v)
+                    queue.append(v)
 
     if len(top_order) != n:
         print('Graph has at least one cycle')
 
     
 
-    return str(top_order)
+    return top_order
 
-def adjcacency_matrix_tarjan():
-    pass
+def adjcacency_matrix_tarjan(matrix):
+    n = len(matrix)
+    top_order = deque([])
+    temporary_mark = set()
+    permanent_mark = set()
+
+    def visit(v):
+        if v in permanent_mark:
+            return
+        if v in temporary_mark:
+            raise ValueError("Graph has at least one cycle")
+
+        temporary_mark.add(v)
+
+        for u in range(n):
+            if matrix[v][u] == 1:
+                visit(u)
+
+        temporary_mark.remove(v)
+        permanent_mark.add(v)
+        top_order.appendleft(v+1)
+
+    for v in range(n):
+        if v not in permanent_mark:
+            visit(v)
+
+    return top_order

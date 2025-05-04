@@ -22,18 +22,28 @@ def menu(graph, rep):
                     print_table(graph)
 
             elif state == 'find':
-                try:
-                    start = int(input('start> '))
-                    end = int(input('end> '))
-
-                    if rep == 'list':
-                        adjacency_list_find(graph, start, end)
-                    elif rep == 'matrix':
-                        adjacency_matrix_find(graph, start, end)
-                    elif rep == 'table':
-                        table_find(graph, start, end)
-                except ValueError:
-                    print('Values must be numbers')
+                while True:
+                    try:
+                        start = int(input('start> '))
+                        while start>len(graph) or start<1:
+                            print(f"Start must be between 0 and {len(graph)}")
+                            start = int(input('start> '))
+                        end = int(input('end> '))
+                        while end>len(graph) or end<1:
+                            print(f"End must be between 0 and {len(graph)}")
+                            end = int(input('end> '))
+                        if rep == 'list':
+                            adjacency_list_find(graph, start, end)
+                        elif rep == 'matrix':
+                            adjacency_matrix_find(graph, start, end)
+                        elif rep == 'table':
+                            table_find(graph, start, end)
+                        break
+                    except ValueError:
+                        print('Values must be numbers')
+                    except KeyboardInterrupt:
+                        print("\nKeyboardInterrupt")
+                        sys.exit(1)
 
             elif state == 'bfs':
                 print('Breath-first search order:')
@@ -58,7 +68,7 @@ def menu(graph, rep):
                 if rep == 'list':
                     print(*adjacency_list_kahn(graph))
                 elif rep == 'matrix':
-                    print(adjacency_matrix_kahn(graph))
+                    print(*adjacency_matrix_kahn(graph))
                 elif rep == 'table':
                     print(*table_kahn(graph))
 
@@ -67,7 +77,7 @@ def menu(graph, rep):
                 if rep == 'list':
                     print(*adjacency_list_tarjan(graph))
                 elif rep == 'matrix':
-                    print(adjcacency_matrix_tarjan)
+                    print(*adjcacency_matrix_tarjan(graph))
                 elif rep == 'table':
                     print(*table_tarjan(graph))
 

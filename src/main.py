@@ -56,6 +56,9 @@ def main():
         except ValueError:
             print('Number of nodes MUST be an integer')
             continue
+        except KeyboardInterrupt:
+            print("\nKeyboardInterrupt")
+            sys.exit(1)
         else:
             break
 
