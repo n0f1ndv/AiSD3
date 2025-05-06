@@ -38,6 +38,9 @@ exit - Exits the program
 '''
 def main():
     graph = None
+    if len(sys.argv) !=2 or (sys.argv[1] != "--generate" and sys.argv[1] != "--user-provided"):
+        print("Usage: python3 src/main.py --generate/--user-provided.")
+        sys.exit(1)
     
     try:
         rep = input('type> ').strip().lower()
