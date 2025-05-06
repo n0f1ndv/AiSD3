@@ -1,7 +1,8 @@
 from collections import deque
 from bisect import bisect_left
 import numpy as np
-import sys 
+import sys
+
 def generate_adjacency_matrix(nodes):
     adj_matrix=[]
     sat=101
@@ -35,6 +36,7 @@ def generate_adjacency_matrix(nodes):
                 adj_matrix[i].append(0)
     return adj_matrix
 
+
 def dfs_matrix(visited, matrix, lst, v=0):
     visited[v] = True
     lst.append(v+1)
@@ -42,6 +44,7 @@ def dfs_matrix(visited, matrix, lst, v=0):
     for i in range(len(matrix)):
         if matrix[v][i] == 1 and not visited[i]:
             dfs_matrix(visited, matrix, lst, i)
+
 
 def input_adjacency_matrix(nodes):
     matrix = []
@@ -75,6 +78,7 @@ def input_adjacency_matrix(nodes):
                 matrix[i].append(0)
     return matrix
 
+
 def print_adjacency_matrix(matrix):
     size = len(matrix)
     print("  | ", end="")
@@ -90,11 +94,13 @@ def print_adjacency_matrix(matrix):
             print(f"{matrix[i][j]}",end="")
         print()
 
+
 def adjacency_matrix_find(graph, start, end):
     if graph[start][end]==1:
         print(f'True: Edge {(start, end)} exists in the Graph.')
     else:
         print(f'False: Edge {(start, end)} doesn\'t exist in the Graph.')
+
 
 def adjacency_matrix_bfs(matrix,start=0):
     lst=[]
@@ -115,6 +121,7 @@ def adjacency_matrix_bfs(matrix,start=0):
                 queue.append(i)
     print(*lst)
 
+
 def adjacency_matrix_dfs(graph):
     lst=[]
     n = len(graph)
@@ -122,6 +129,7 @@ def adjacency_matrix_dfs(graph):
 
     dfs_matrix(visited,graph, lst)
     print(*lst)
+
 
 def adjacency_matrix_kahn(matrix):
     n = len(matrix)
@@ -151,6 +159,7 @@ def adjacency_matrix_kahn(matrix):
     
 
     return top_order
+
 
 def adjcacency_matrix_tarjan(matrix):
     n = len(matrix)

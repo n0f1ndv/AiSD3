@@ -7,9 +7,12 @@ def generate_adjacency_list(nodes):
     adj_mat = generate_adjacency_matrix(nodes)
 
     for u in range(nodes):
+        adjacency_list[u]
+
         for v in range(nodes):
             if adj_mat[u][v] == 1:
                 adjacency_list[u].append(v)
+
 
     return adjacency_list
 
