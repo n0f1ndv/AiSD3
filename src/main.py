@@ -1,9 +1,7 @@
 import argcomplete
 import argparse
 import sys
-from adj_mat import generate_adjacency_matrix, input_adjacency_matrix
-from adj_lst import generate_adjacency_list, input_adjacency_list
-from table import generate_table, input_table
+from graph_representation import *
 from menu import menu
 
 '''
@@ -40,6 +38,7 @@ exit - Exits the program
 '''
 def main():
     graph = None
+    
     try:
         rep = input('type> ').strip().lower()
         while rep not in ['list', 'matrix', 'table']:

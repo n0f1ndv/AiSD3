@@ -1,6 +1,7 @@
-from adj_lst import *
-from adj_mat import *
+from adjacency_list import *
+from adjacency_matrix import *
 from table import *
+import sys
 
 def menu(graph, rep, nodes):
     state = ''
