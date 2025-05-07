@@ -12,13 +12,13 @@ def dfs_matrix(visited, matrix, lst, v=0):
 def print_adjacency_matrix(matrix):
     size = len(matrix)
     print("  | ", end="")
-    for i in range(1,size+1): print(F"{i} ",end='')
+    for i in range(size): print(F"{i} ",end='')
     print()
     print("--+",end="")
     for i in range(size): print("-"*(len(str(i))+1),end='')
     print("-")
     for i in range(size): 
-        print(f"{i+1} |",end='')
+        print(f"{i} |",end='')
         for j in range(size):
             print(" "*len(str(j+1)),end='')
             print(f"{matrix[i][j]}",end="")

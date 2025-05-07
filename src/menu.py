@@ -1,6 +1,7 @@
 from adjacency_list import *
 from adjacency_matrix import *
 from table import *
+from export import *
 import sys
 
 def menu(graph, rep, nodes):
@@ -81,6 +82,13 @@ def menu(graph, rep, nodes):
                     print(*adjcacency_matrix_tarjan(graph))
                 elif rep == 'table':
                     print(*table_tarjan(graph))
+            elif state == "export":
+                if rep == 'list':
+                    adjacency_list_export(graph, nodes+1)
+                elif rep == 'matrix':
+                    adjcacency_matrix_export(graph, nodes+1)
+                elif rep == 'table':
+                    table_export(graph, nodes+1)
 
             else:
                 print('This commend doesn\'t exist')
