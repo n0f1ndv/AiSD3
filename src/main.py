@@ -1,7 +1,9 @@
 import argcomplete
 import argparse
 import sys
-from graph_representation import *
+from adjacency_list_representation import input_adjacency_list, generate_adjacency_list
+from adjacency_matrix_represenation import input_adjacency_matrix, generate_adjacency_matrix
+from table_represenation import input_table, generate_table
 from menu import menu
 
 '''

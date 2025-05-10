@@ -28,12 +28,12 @@ def menu(graph, rep, nodes):
                     try:
                         start = int(input('start> '))
                         while start > nodes or start < 0:
-                            print(f"Start must be between 0 and {nodes}")
+                            print(f'Start must be between 0 and {nodes}')
                             start = int(input('start> '))
                         end = int(input('end> '))
 
                         while end > nodes or end < 0:
-                            print(f"End must be between 0 and {nodes}")
+                            print(f'End must be between 0 and {nodes}')
                             end = int(input('end> '))
 
                         if rep == 'list':
@@ -53,7 +53,7 @@ def menu(graph, rep, nodes):
                     except ValueError:
                         print('Values must be numbers')
                     except KeyboardInterrupt:
-                        print("\nKeyboardInterrupt")
+                        print('\nKeyboardInterrupt')
                         sys.exit(1)
 
             elif state == 'bfs':
@@ -91,7 +91,8 @@ def menu(graph, rep, nodes):
                     print(*adjcacency_matrix_tarjan(graph))
                 elif rep == 'table':
                     print(*table_tarjan(graph))
-            elif state == "export":
+                    
+            elif state == 'export':
                 if rep == 'list':
                     adjacency_list_export(graph, nodes+1)
                 elif rep == 'matrix':
