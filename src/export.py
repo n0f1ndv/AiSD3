@@ -9,6 +9,7 @@ def generate_coordinates(nodes,r=2.5):
         coordinates.append((x, y))
     return coordinates
 
+
 def adjacency_list_export(graph,nodes):
     coordinates_list=generate_coordinates(nodes)
     for node in range(nodes):
@@ -18,7 +19,6 @@ def adjacency_list_export(graph,nodes):
         for edge in range(nodes):
             if edge in graph[node]:
                 print(f"\\path [->]({node}) edge ({edge});")
-
 
 
 def adjcacency_matrix_export(graph,nodes):
@@ -31,9 +31,10 @@ def adjcacency_matrix_export(graph,nodes):
             if graph[node][edge]==1:
                 print(f"\\path [->]({node}) edge ({edge});")
     
-def table_export(graph,nodes):
 
+def table_export(graph,nodes):
     coordinates_list=generate_coordinates(nodes)
+
     for node in range(nodes):
         print(f"\\node[shape=circle,draw=black] ({node}) at {coordinates_list[node]} {{{node}}};")
     print()
