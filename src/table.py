@@ -24,10 +24,7 @@ def table_find(graph, start, end):
             exists = True
             break
 
-    if exists == True:
-        print(f'True: Edge {(start, end)} exists in the Graph.')
-    else:
-        print(f'False: Edge {(start, end)} doesn\'t exist in the Graph.')
+    return exists
 
 
 def get_neighbors(graph, vertex):

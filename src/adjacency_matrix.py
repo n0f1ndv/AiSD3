@@ -26,10 +26,10 @@ def print_adjacency_matrix(matrix):
 
 
 def adjacency_matrix_find(graph, start, end):
-    if graph[start][end]==1:
-        print(f'True: Edge {(start, end)} exists in the Graph.')
+    if graph[start][end] == 1:
+        return True
     else:
-        print(f'False: Edge {(start, end)} doesn\'t exist in the Graph.')
+        return False
 
 
 def adjacency_matrix_bfs(matrix,start=0):

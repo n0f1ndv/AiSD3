@@ -20,10 +20,10 @@ def generate_adjacency_list(nodes):
 
 
 def input_adjacency_list(nodes):
-    adjacency_list = defaultdict(list)
+    adjacency_list = []
 
     for u in range(nodes):
-        adjacency_list[u]
+        adjacency_list.append([])
 
         while True:
             try:

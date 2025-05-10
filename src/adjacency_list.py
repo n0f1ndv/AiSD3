@@ -2,8 +2,12 @@ from collections import deque
 
 def print_adjacency_list(graph):
     print('Adjacency list:')
-    for u, v in graph.items():
-        print(f'{u}-> {v}')
+    for u in range(len(graph)):
+        tmp = []
+        for v in graph[u]:
+            tmp.append(v)
+
+        print(f'{u}-> {tmp}')
 
 
 def adjacency_list_find(graph, start, end):
@@ -16,10 +20,7 @@ def adjacency_list_find(graph, start, end):
             exists = True
             break
 
-    if exists == True:
-        print(f'True: Edge {(start, end)} exists in the Graph.')
-    else:
-        print(f'False: Edge {(start, end)} doesn\'t exist in the Graph.')   
+    return exists 
 
 
 def adjacency_list_bfs(graph, vertex=0):

@@ -27,20 +27,29 @@ def menu(graph, rep, nodes):
                 while True:
                     try:
                         start = int(input('start> '))
-                        while start>nodes or start<0:
+                        while start > nodes or start < 0:
                             print(f"Start must be between 0 and {nodes}")
                             start = int(input('start> '))
                         end = int(input('end> '))
-                        while end>nodes or end<0:
+
+                        while end > nodes or end < 0:
                             print(f"End must be between 0 and {nodes}")
                             end = int(input('end> '))
+
                         if rep == 'list':
-                            adjacency_list_find(graph, start, end)
+                            exists = adjacency_list_find(graph, start, end)
                         elif rep == 'matrix':
-                            adjacency_matrix_find(graph, start, end)
+                            exists = adjacency_matrix_find(graph, start, end)
                         elif rep == 'table':
-                            table_find(graph, start, end)
+                            exists(graph, start, end)
+
+                        if exists == True:
+                            print(f'True: Edge {(start, end)} exists in the Graph.')
+                        else:
+                            print(f'False: Edge {(start, end)} doesn\'t exist in the Graph.')
+
                         break
+
                     except ValueError:
                         print('Values must be numbers')
                     except KeyboardInterrupt:
