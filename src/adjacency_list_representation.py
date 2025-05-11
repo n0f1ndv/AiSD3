@@ -1,14 +1,12 @@
-import sys
-from collections import defaultdict
 from adjacency_matrix_represenation import generate_adjacency_matrix
 from backend import get_neighbors_to_insert
 
 def generate_adjacency_list(nodes):
-    adjacency_list = defaultdict(list)
+    adjacency_list = []
     adj_mat = generate_adjacency_matrix(nodes)
 
     for u in range(nodes):
-        adjacency_list[u]
+        adjacency_list.append([])
 
         for v in range(nodes):
             if adj_mat[u][v] == 1:
