@@ -1,13 +1,5 @@
 from collections import deque
-
-def vertices(graph):
-    unique_vertices = set()
-
-    for u, v in graph:
-        unique_vertices.add(u)
-        unique_vertices.add(v)
-
-    return list(unique_vertices)
+from backend import get_vertices
 
 
 def print_table(graph):
@@ -38,7 +30,7 @@ def get_neighbors(graph, vertex):
 
 
 def table_bfs(graph, vertex=0):
-    marked = [False for _ in range(len(vertices(graph)))]
+    marked = [False for _ in range(len(get_vertices(graph)))]
     queue = []
     
     queue.append(vertex)
@@ -57,7 +49,7 @@ def table_bfs(graph, vertex=0):
 
 
 def table_dfs(graph, vertex=0):
-    marked = [False for _ in range(len(vertices(graph)))]
+    marked = [False for _ in range(len(get_vertices(graph)))]
     stack = []
 
     stack.append(vertex)
@@ -76,15 +68,15 @@ def table_dfs(graph, vertex=0):
 
 
 def table_kahn(graph):
-    vert = vertices(graph)
-    in_degree = deque([0 for _ in range(len(vert))])
+    vertices = get_vertices(graph)
+    in_degree = deque([0 for _ in range(len(vertices))])
 
-    for v in vert:
+    for v in vertices:
         for edge in graph:
             if edge[1] == v:
                 in_degree[v] += 1
     
-    queue = deque([x for x in range(len(vert)) if in_degree[x] == 0])
+    queue = deque([x for x in range(len(vertices)) if in_degree[x] == 0])
 
     topo_sort = []
 
@@ -97,7 +89,7 @@ def table_kahn(graph):
             if in_degree[neighbor] == 0:
                 queue.append(neighbor)
 
-    if len(topo_sort) != len(vert):
+    if len(topo_sort) != len(vertices):
         print('Graph has at least one cycle')
         return []
 
@@ -107,7 +99,7 @@ def table_kahn(graph):
 def table_tarjan(graph):
     topo_sort = deque([])
 
-    vert = vertices(graph)
+    vert = get_vertices(graph)
 
     temporary_mark = set()
     permanent_mark = set()

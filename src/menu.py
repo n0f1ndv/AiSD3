@@ -41,7 +41,7 @@ def menu(graph, rep, nodes):
                         elif rep == 'matrix':
                             exists = adjacency_matrix_find(graph, start, end)
                         elif rep == 'table':
-                            exists(graph, start, end)
+                            exists = table_find(graph, start, end)
 
                         if exists == True:
                             print(f'True: Edge {(start, end)} exists in the Graph.')

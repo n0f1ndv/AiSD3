@@ -21,3 +21,12 @@ def get_neighbors_to_insert(vertex, nodes):
             sys.exit(1)
 
     return vertices
+
+def get_vertices(graph):
+    unique_vertices = set()
+
+    for u, v in graph:
+        unique_vertices.add(u)
+        unique_vertices.add(v)
+
+    return list(unique_vertices)
