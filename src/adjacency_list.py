@@ -109,7 +109,7 @@ def adjacency_list_tarjan(graph):
 
         topo_sort.appendleft(vertex)
     
-    for v in graph:
+    for v in range(len(graph)):
         if v not in permanent_mark:
             visit(v)
 
