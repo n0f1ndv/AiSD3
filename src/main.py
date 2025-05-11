@@ -1,47 +1,47 @@
-import argcomplete
-import argparse
 import sys
 from adjacency_list_representation import input_adjacency_list, generate_adjacency_list
 from adjacency_matrix_represenation import input_adjacency_matrix, generate_adjacency_matrix
 from table_represenation import input_table, generate_table
 from menu import menu
 
-'''
-Usage:
-python3 main.py --generate
-type> list, matrix, table
-nodes> Number of vertecies
-saturation> How many vertecies are in the graph
 
-python3 main.py --user-provided
-!!! DOES NOT CHECK WHETHER GIVEN GRAPH IS ACYCLIC !!!
-type> list, matrix, table
-nodes>
-0>
-...
-nodes>
-
-Available actions:
-print - Prints the graph
-
-find - Search for edge (start, end) in graph
-start> Start vertex
-end> End vertex
-
-bfs - Breath-first search order
-
-dfs - Depth-first search order
-
-kahn - Topological sort using Kahn algorithm
-
-tarjan - Topological sort using Tarjan algorithm
-
-exit - Exits the program
-'''
 def main():
+    """
+    Usage:
+    python3 main.py --generate
+    type> list, matrix, table
+    nodes> Number of vertecies
+    saturation> How many vertecies are in the graph
+    
+    python3 main.py --user-provided
+    !!! DOES NOT CHECK WHETHER GIVEN GRAPH IS ACYCLIC !!!
+    type> list, matrix, table
+    nodes>
+    0>
+    ...
+    nodes>
+    
+    Available actions:
+    print - Prints the graph
+    
+    find - Search for edge (start, end) in graph
+    start> Start vertex
+    end> End vertex
+    
+    bfs - Breath-first search order
+    
+    dfs - Depth-first search order
+    
+    kahn - Topological sort using Kahn algorithm
+    
+    tarjan - Topological sort using Tarjan algorithm
+    
+    exit - Exits the program
+    """
+    
     graph = None
-    if len(sys.argv) !=2 or (sys.argv[1] != "--generate" and sys.argv[1] != "--user-provided"):
-        print("Usage: python3 src/main.py --generate/--user-provided.")
+    if len(sys.argv) !=2 or (sys.argv[1] != '--generate' and sys.argv[1] != '--user-provided'):
+        print('Usage: python3 src/main.py --generate/--user-provided.')
         sys.exit(1)
     
     try:
@@ -61,7 +61,7 @@ def main():
             print('Number of nodes MUST be an integer')
             continue
         except KeyboardInterrupt:
-            print("\nKeyboardInterrupt")
+            print('\nKeyboardInterrupt')
             sys.exit(1)
         else:
             break
