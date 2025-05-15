@@ -23,11 +23,24 @@ def adjacency_list_find(graph, start, end):
     return exists 
 
 
+def get_zero_in_degree(graph):
+    in_degree = [0 for _ in range(len(graph))]
+
+    for u in range(len(graph)):
+        for v in graph[u]:
+            in_degree[v] += 1
+
+    zero_in_degree = deque([x for x in range(len(graph)) if in_degree[x] == 0])
+
+    return zero_in_degree
+
 def adjacency_list_bfs(graph, vertex=0):
     visited = [False for _ in range(len(graph))]
     queue = []
 
-    queue.append(vertex)
+    # enques vertices which are not accessible from anothers
+    for vertex in get_zero_in_degree(graph):
+        queue.append(vertex)
     visited[vertex] = True
 
     while queue:
@@ -41,11 +54,14 @@ def adjacency_list_bfs(graph, vertex=0):
 
     print()
 
+
 def adjacency_list_dfs(graph, vertex=0):
     visited = [False for _ in range(len(graph))]
     stack = []
 
-    stack.append(vertex)
+    # puts on stack vertices which are not accessible from anothers
+    for vertex in get_zero_in_degree(graph):
+        stack.append(vertex)
 
     while stack:
         vertex = stack.pop()
