@@ -60,11 +60,12 @@ def input_adjacency_matrix(nodes):
         
         tmp.sort()
         matrix.append([])
-        for num in range(1, nodes + 1):
+        for num in range(0, nodes):
             # binary search in tmp
             index = bisect_left(tmp, num)
             if index < len(tmp) and tmp[index] == num:
                 matrix[i].append(1)
             else:
                 matrix[i].append(0)
+                
     return matrix

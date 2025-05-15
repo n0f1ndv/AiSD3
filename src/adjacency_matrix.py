@@ -1,16 +1,7 @@
 from collections import deque
 
-def dfs_matrix(visited, matrix, lst, v=0):
-    visited[v] = True
-    lst.append(v+1)
-
-    for i in range(len(matrix)):
-        if matrix[v][i] == 1 and not visited[i]:
-            dfs_matrix(visited, matrix, lst, i)
-
-
-def print_adjacency_matrix(matrix):
-    size = len(matrix)
+def print_adjacency_matrix(graph):
+    size = len(graph)
     print("  | ", end="")
     for i in range(size): print(F"{i} ",end='')
     print()
@@ -21,20 +12,31 @@ def print_adjacency_matrix(matrix):
         print(f"{i} |",end='')
         for j in range(size):
             print(" "*len(str(j+1)),end='')
-            print(f"{matrix[i][j]}",end="")
+            print(f"{graph[i][j]}",end="")
         print()
 
 
 def adjacency_matrix_find(graph, start, end):
     if graph[start][end] == 1:
         return True
-    else:
-        return False
+    
+    return False
 
 
-def adjacency_matrix_bfs(matrix,start=0):
-    lst=[]
-    n = len(matrix)
+def get_zero_in_degree(graph):
+    n = len(graph)
+    in_degree = [0] * n
+
+    for i in range(n):
+        for j in range(n):
+            if graph[i][j] == 1:
+                in_degree[j] += 1
+
+    return  deque([i for i in range(n) if in_degree[i] == 0])
+
+def adjacency_matrix_bfs(graph,start=0):
+    lst = []
+    n = len(graph)
     visited = [False] * n
     queue = deque()
 
@@ -43,56 +45,64 @@ def adjacency_matrix_bfs(matrix,start=0):
 
     while queue:
         v = queue.popleft()
-        lst.append(v+1)
+        lst.append(v)
 
         for i in range(n):
-            if matrix[v][i] == 1 and not visited[i]:
+            if graph[v][i] == 1 and not visited[i]:
                 visited[i] = True
                 queue.append(i)
+
     print(*lst)
 
 
 def adjacency_matrix_dfs(graph):
+
+    def dfs(visited, graph, lst, v=0):
+        visited[v] = True
+        lst.append(v)
+
+        for i in range(len(graph)):
+            if graph[v][i] == 1 and not visited[i]:
+                dfs(visited, graph, lst, i)
+
     lst=[]
     n = len(graph)
     visited = [False] * n
 
-    dfs_matrix(visited,graph, lst)
+    dfs(visited, graph, lst)
     print(*lst)
 
 
-def adjacency_matrix_kahn(matrix):
-    n = len(matrix)
+def adjacency_matrix_kahn(graph):
+    n = len(graph)
     in_degree = [0] * n
 
     for i in range(n):
         for j in range(n):
-            if matrix[i][j] == 1:
+            if graph[i][j] == 1:
                 in_degree[j] += 1
 
     queue = deque([i for i in range(n) if in_degree[i] == 0])
-    top_order = []
+    topo_order = []
 
     while queue:
         u = queue.popleft()
-        top_order.append(u+1)
+        topo_order.append(u)
 
         for v in range(n):
-            if matrix[u][v] == 1:
+            if graph[u][v] == 1:
                 in_degree[v] -= 1
                 if in_degree[v] == 0:
                     queue.append(v)
 
-    if len(top_order) != n:
+    if len(topo_order) != n:
         print('Graph has at least one cycle')
 
-    
-
-    return top_order
+    return topo_order
 
 
-def adjcacency_matrix_tarjan(matrix):
-    n = len(matrix)
+def adjcacency_matrix_tarjan(graph):
+    n = len(graph)
     top_order = deque([])
     temporary_mark = set()
     permanent_mark = set()
@@ -106,12 +116,12 @@ def adjcacency_matrix_tarjan(matrix):
         temporary_mark.add(v)
 
         for u in range(n):
-            if matrix[v][u] == 1:
+            if graph[v][u] == 1:
                 visit(u)
 
         temporary_mark.remove(v)
         permanent_mark.add(v)
-        top_order.appendleft(v+1)
+        top_order.appendleft(v)
 
     for v in range(n):
         if v not in permanent_mark:
