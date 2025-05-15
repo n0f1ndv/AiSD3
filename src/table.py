@@ -29,11 +29,24 @@ def get_neighbors(graph, vertex):
     return list(set(neighbors))
 
 
+def get_zero_in_degree(graph):
+    vertices = get_vertices(graph)
+    in_degree = deque([0 for _ in range(len(vertices))])
+
+    for v in vertices:
+        for edge in graph:
+            if edge[1] == v:
+                in_degree[v] += 1
+    
+    return deque([x for x in range(len(vertices)) if in_degree[x] == 0])
+
+
 def table_bfs(graph, vertex=0):
     marked = [False for _ in range(len(get_vertices(graph)))]
     queue = []
     
-    queue.append(vertex)
+    for vertex in get_zero_in_degree(graph):
+        queue.append(vertex)
     marked[vertex] = True
 
     while queue:
@@ -52,7 +65,8 @@ def table_dfs(graph, vertex=0):
     marked = [False for _ in range(len(get_vertices(graph)))]
     stack = []
 
-    stack.append(vertex)
+    for vertex in get_zero_in_degree(graph):
+        stack.append(vertex)
 
     while stack:
         vertex = stack.pop()

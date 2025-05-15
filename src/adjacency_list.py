@@ -30,9 +30,8 @@ def get_zero_in_degree(graph):
         for v in graph[u]:
             in_degree[v] += 1
 
-    zero_in_degree = deque([x for x in range(len(graph)) if in_degree[x] == 0])
+    return deque([x for x in range(len(graph)) if in_degree[x] == 0])
 
-    return zero_in_degree
 
 def adjacency_list_bfs(graph, vertex=0):
     visited = [False for _ in range(len(graph))]
