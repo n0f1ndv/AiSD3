@@ -40,7 +40,7 @@ def adjacency_list_bfs(graph, vertex=0):
     # enques vertices which are not accessible from anothers
     for vertex in get_zero_in_degree(graph):
         queue.append(vertex)
-    visited[vertex] = True
+        visited[vertex] = True
 
     while queue:
         vertex = queue.pop(0)

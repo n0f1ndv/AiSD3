@@ -11,8 +11,6 @@ def generate_table(nodes):
             if adj_mat[u][v] == 1:
                 table.append((u, v))
 
-    print(adj_mat)
-
     return table
 
 
@@ -24,8 +22,5 @@ def input_table(nodes):
         
         for num in vertices:
             table.append((v, num))
-
-    # for debugging
-    print(table)
 
     return table

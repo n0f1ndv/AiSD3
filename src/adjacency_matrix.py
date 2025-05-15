@@ -32,7 +32,8 @@ def get_zero_in_degree(graph):
             if graph[i][j] == 1:
                 in_degree[j] += 1
 
-    return  deque([i for i in range(n) if in_degree[i] == 0])
+    return deque([i for i in range(n) if in_degree[i] == 0])
+
 
 def adjacency_matrix_bfs(graph,start=0):
     lst = []
@@ -40,8 +41,9 @@ def adjacency_matrix_bfs(graph,start=0):
     visited = [False] * n
     queue = deque()
 
-    visited[start] = True
-    queue.append(start)
+    for vertex in get_zero_in_degree(graph):
+        queue.append(vertex)
+        visited[start] = True
 
     while queue:
         v = queue.popleft()
@@ -55,22 +57,24 @@ def adjacency_matrix_bfs(graph,start=0):
     print(*lst)
 
 
-def adjacency_matrix_dfs(graph):
+def adjacency_matrix_dfs(graph, vertex=0):
+    visited = [False for _ in range(len(graph))]
+    stack = []
 
-    def dfs(visited, graph, lst, v=0):
-        visited[v] = True
-        lst.append(v)
+    for vertex in get_zero_in_degree(graph):
+        stack.append(vertex)
 
-        for i in range(len(graph)):
-            if graph[v][i] == 1 and not visited[i]:
-                dfs(visited, graph, lst, i)
+    while stack:
+        vertex = stack.pop()
+        if not visited[vertex]:
+            print(vertex, end=' ')
+            visited[vertex] = True
 
-    lst=[]
-    n = len(graph)
-    visited = [False] * n
+            for neighbor in range(len(graph)):
+                if graph[vertex][neighbor] == 1 and not visited[neighbor]:
+                    stack.append(neighbor)
 
-    dfs(visited, graph, lst)
-    print(*lst)
+    print()
 
 
 def adjacency_matrix_kahn(graph):
@@ -103,7 +107,7 @@ def adjacency_matrix_kahn(graph):
 
 def adjcacency_matrix_tarjan(graph):
     n = len(graph)
-    top_order = deque([])
+    topo_order = deque([])
     temporary_mark = set()
     permanent_mark = set()
 
@@ -121,10 +125,10 @@ def adjcacency_matrix_tarjan(graph):
 
         temporary_mark.remove(v)
         permanent_mark.add(v)
-        top_order.appendleft(v)
+        topo_order.appendleft(v)
 
     for v in range(n):
         if v not in permanent_mark:
             visit(v)
 
-    return top_order
+    return topo_order

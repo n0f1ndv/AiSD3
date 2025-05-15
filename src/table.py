@@ -42,27 +42,27 @@ def get_zero_in_degree(graph):
 
 
 def table_bfs(graph, vertex=0):
-    marked = [False for _ in range(len(get_vertices(graph)))]
+    visited = [False for _ in range(len(get_vertices(graph)))]
     queue = []
     
     for vertex in get_zero_in_degree(graph):
         queue.append(vertex)
-    marked[vertex] = True
+        visited[vertex] = True
 
     while queue:
         vertex = queue.pop(0)
         print(vertex, end=' ')
 
         for x in get_neighbors(graph, vertex):
-            if not marked[x]:
+            if not visited[x]:
                 queue.append(x)
-                marked[x] = True
+                visited[x] = True
 
     print()
 
 
 def table_dfs(graph, vertex=0):
-    marked = [False for _ in range(len(get_vertices(graph)))]
+    visited = [False for _ in range(len(get_vertices(graph)))]
     stack = []
 
     for vertex in get_zero_in_degree(graph):
@@ -71,12 +71,12 @@ def table_dfs(graph, vertex=0):
     while stack:
         vertex = stack.pop()
         print(vertex, end=' ')
-        marked[vertex] = True
+        visited[vertex] = True
 
         for x in get_neighbors(graph, vertex):
-            if not marked[x]:
+            if not visited[x]:
                 stack.append(x)
-                marked[x] = True
+                visited[x] = True
 
     print()
 
