@@ -2,6 +2,7 @@ from adjacency_list import *
 from adjacency_matrix import *
 from table import *
 from export import *
+from backend import display_avaialable_actions
 import sys
 
 def menu(graph, rep, nodes):
@@ -99,6 +100,9 @@ def menu(graph, rep, nodes):
                     adjcacency_matrix_export(graph, nodes+1)
                 elif rep == 'table':
                     table_export(graph, nodes+1)
+
+            elif state == 'help':
+                display_avaialable_actions()
 
             else:
                 print('This commend doesn\'t exist')

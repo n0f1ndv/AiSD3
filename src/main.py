@@ -1,4 +1,5 @@
 import sys
+import select
 from adjacency_list_representation import input_adjacency_list, generate_adjacency_list
 from adjacency_matrix_represenation import input_adjacency_matrix, generate_adjacency_matrix
 from table_represenation import input_table, generate_table
@@ -22,6 +23,8 @@ def main():
     nodes>
     
     Available actions:
+    help - Prints avaialable actions
+
     print - Prints the graph
     
     find - Search for edge (start, end) in graph
@@ -35,6 +38,8 @@ def main():
     kahn - Topological sort using Kahn algorithm
     
     tarjan - Topological sort using Tarjan algorithm
+
+    export - Exports graph to TikZ
     
     exit - Exits the program
     """

@@ -22,6 +22,7 @@ def get_neighbors_to_insert(vertex, nodes):
 
     return vertices
 
+
 def get_vertices(graph):
     unique_vertices = set()
 
@@ -30,3 +31,7 @@ def get_vertices(graph):
         unique_vertices.add(v)
 
     return list(unique_vertices)
+
+
+def display_avaialable_actions():
+    print('Available actions\nprint\nfind\nbfs\ndfs\nkahn\ntarjan\nexport\nexit')
